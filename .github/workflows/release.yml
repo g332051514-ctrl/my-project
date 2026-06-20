@@ -1,0 +1,19 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create Pull Request
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: "develop"
+          destination_branch: "main"
+          pr_title: "Publish from develop to main"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
